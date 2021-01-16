@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+<div id='images-page'>
+  <div id='new-image'>
+    <%= link_to 'New Image', new_image_path %>
+  </div>
+  <div id='image-column'>
+    <h1>Images</h1>
+    <% @images.each do |image| %>
+      <%= image.public %>
+      <%= image_tag( image.photo, width: 400) if image.photo.attached? %>
+    <% end %>
+    <br>
+  </div>
+  <div id='users-column'>
+    <h2>Users:</h2>
+    <% User.all.each do |user| %>
+      <%= link_to user.email, user %>
+    <% end %>
+  </div>
+</div>
