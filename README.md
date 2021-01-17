@@ -2,7 +2,6 @@
 
 This app is created for the Shopify intern application, it is created using Ruby on Rails v6.0.3.4
 
-You can view a sample of the website at 
 
 Features: 
 
