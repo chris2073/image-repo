@@ -1,5 +1,4 @@
 class ImagesController < ApplicationController
-  before_action :set_image, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create]
 
   # GET /images
@@ -10,11 +9,6 @@ class ImagesController < ApplicationController
     
   end
 
-  # GET /images/1
-  # GET /images/1.json
-  def show
-    @image = Image.find_by_id(params[:id])
-  end
 
   # GET /images/new
   def new
@@ -22,51 +16,35 @@ class ImagesController < ApplicationController
     @image = @current_user.images.new
   end
 
-  # GET /images/1/edit
-  def edit
-  end
 
   # POST /images
   # POST /images.json
   def create
     @current_user = User.find_by_id(current_user.id)
-    @image = @current_user.images.new(public: image_params[:public])
-    @image.photo.attach(image_params[:image])
-
-    respond_to do |format|
-      if @image.save
-        format.html { redirect_to @image, notice: 'Image was successfully created.' }
-        format.json { render :show, status: :created, location: @image }
+    @image_array = params[:image][:photo]
+    # loops through array of images submitted and create and image model for each of them
+    for image in @image_array do
+      if (@image_array.index(image) == @image_array.length - 1) 
+        @image = @current_user.images.new(public: image_params[:public])
+        @image.photo.attach(image)
+        respond_to do |format|
+          if @image.save
+            format.html { redirect_to images_url, notice: 'Images were successfully uploaded.' }
+            format.json { render :show, status: :created, location: @images }
+          else
+            format.html { render :new }
+            format.json { render json: @image.errors, status: :unprocessable_entity }
+          end
+        end
       else
-        format.html { render :new }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
+          @image = @current_user.images.new(public: image_params[:public])
+          @image.photo.attach(image)
+          @image.save
       end
     end
+
   end
 
-  # PATCH/PUT /images/1
-  # PATCH/PUT /images/1.json
-  def update
-    respond_to do |format|
-      if @image.update(image_params)
-        format.html { redirect_to @image, notice: 'Image was successfully updated.' }
-        format.json { render :show, status: :ok, location: @image }
-      else
-        format.html { render :edit }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /images/1
-  # DELETE /images/1.json
-  def destroy
-    @image.destroy
-    respond_to do |format|
-      format.html { redirect_to images_url, notice: 'Image was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -76,6 +54,6 @@ class ImagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def image_params
-      params.require(:image).permit(:public, :image)
+      params.require(:image).permit(:public, :photo)
     end
 end

@@ -7,6 +7,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 50%;
 }
 
 #images-page {
@@ -17,4 +18,9 @@
 #users-column {
     display: flex;
     flex-direction: column;
+    width: 25%;
+}
+
+#new-image {
+    width: 25%;
 }
