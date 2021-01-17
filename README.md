@@ -1,24 +1,30 @@
-# README
+# Image Repository for Shopify application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app is created for the Shopify intern application, it is created using Ruby on Rails v6.0.3.4
 
-Things you may want to cover:
+You can view a sample of the website at 
 
-* Ruby version
+Features: 
 
-* System dependencies
+1. Upload one or multiple images
+2. Set images to public or private
+3. Create an account to upload images
+4. View other profiles public images
 
-* Configuration
+This app allows you to add multiple photos and you can set them as public or private. If your images are set to public then they will show up on the main images page and also on your profile for anyone that looks at it, if they are set to private then they are only visible to you on your profile.
 
-* Database creation
+This uses Amazons AWS S3 to host images, but can be configured to use your lcaol device by going in to config\environments\development.rb and changing 'config.active_storage.service = :amazon' to 'config.active_storage.service = :local'
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+# How to install:
 
-* Deployment instructions
+1. Enter main folder of app
+2. Run the command 'bundle install'
+3. Enter your db credentials in config/database.yml
+4. Run 'rails db:setup'
+5. Run 'rails db:migrate'
+6. Run 'rails s' and open the localhost in your browser.
 
-* ...
+
+
