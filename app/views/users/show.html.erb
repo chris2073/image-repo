@@ -7,7 +7,6 @@
       <%= @user.email %>
       <% @images.each do |image| %>
         <tr>
-          <%= @thisshouldbetrue %>
           <%= image_tag( image.photo, height: 300) if image.photo.attached? %>
         </tr>
       <% end %>
