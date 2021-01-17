@@ -6,7 +6,6 @@
   <div id='image-column'>
     <h1>Public Images:</h1>
     <% @images.each do |image| %>
-      <%= image.public %>
       <%= image_tag( image.photo, width: 400) if image.photo.attached? %>
     <% end %>
     <br>
