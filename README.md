@@ -2,7 +2,6 @@
 
 This app is created for the Shopify intern application, it is created using Ruby on Rails v6.0.3.4
 
-You can view a sample of the website at 
 
 Features: 
 
@@ -12,9 +11,6 @@ Features:
 4. View other profiles public images
 
 This app allows you to add multiple photos and you can set them as public or private. If your images are set to public then they will show up on the main images page and also on your profile for anyone that looks at it, if they are set to private then they are only visible to you on your profile.
-
-This uses Amazons AWS S3 to host images, but can be configured to use your local device by going in to config\environments\development.rb and changing 'config.active_storage.service = :amazon' to 'config.active_storage.service = :local'
-
 
 
 # How to install:
